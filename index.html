@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>snoopy learning school</title>
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+
+    <!-- Products -->
+    <script src="products.js"></script>
+
+    <!-- Shopping cart icon -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <!-- logo -->
+        <img
+        src="Snoopy Learning School Logo.jpg"
+        alt="Snoopy Learning School"
+        class="site-logo"
+    >
+        <nav class="top-nav" aria-label="Main navigation">
+            <a href="#shop" v-on:click.prevent="goToSection('shop')">Shop</a>
+            <a href="#about" v-on:click.prevent="goToSection('about')">About</a>
+            <button type="button" class="nav-cart" v-on:click="openCart" v-bind:disabled="cartItemCount === 0">
+                <span class="fas fa-shopping-bag" aria-hidden="true"></span>
+                Cart ({{ cartItemCount }})
+            </button>
+        </nav>
+    </header>
+
+    <!-- Decorative homepage layout: no change to Vue shopping logic -->
+    <section class="hero" v-if="showProduct">
+        <div class="hero-text snoopy-banner">
+            <h1>choclate stays for a week</h1>
+            <h1> But your skill stays forever !</h1>
+            <a class="hero-button" href="#shop">see lessons &rarr;</a>
+       
+    </section>
+
+
+    <!-- MAIN SHOPPING LAYOUT -->
+    <div class="shop-layout" id="shop">
+
+        <!-- LEFT SIDE: PRODUCTS -->
+        <main class="products">
+
+            <div v-if="showProduct">
+
+                <h2>Available lessons</h2>
+
+                <div class="product-grid">
+
+                    <!-- PRODUCT CARD -->
+                    <div class="product-card"
+                         v-for="product in sortedProducts"
+                         v-bind:key="product.id">
+
+                        <figure>
+                            <img v-if="product.image"
+                                 v-bind:src="product.image"
+                                 v-bind:alt="product.title">
+                            <span v-else class="image-placeholder">Add photo later</span>
+                        </figure>
+
+                        <h3 v-text="product.title"></h3>
+
+                        <p v-html="product.description"></p>
+
+                        <p class="price">
+                            Price: ${{ product.price }}
+                        </p>
+
+                        <!-- STAR RATING -->
+                        <div class="rating">
+                            <span v-for="n in product.rating">★</span>
+                            <span v-for="n in 5 - product.rating">☆</span>
+                        </div>
+
+                        <!-- AVAILABLE STOCK -->
+                        <p class="stock">
+                            Available stock:
+                            {{ product.availableInventory - cartCount(product.id) }}
+                        </p>
+
+                        <!-- ADD TO CART -->
+                        <button
+                            v-on:click="addToCart(product)"
+                            v-if="canAddToCart(product)">
+                            Add to Cart
+                        </button>
+
+                        <button disabled="disabled" v-else>
+                            Add to Cart
+                        </button>
+
+                        <!-- INVENTORY MESSAGES -->
+                        <p class="stock-message">
+
+                            <span v-if="product.availableInventory === cartCount(product.id)">
+                                STOCK OUT
+                            </span>
+
+                            <span v-else-if="product.availableInventory - cartCount(product.id) < 5">
+                                Only {{ product.availableInventory - cartCount(product.id) }} left!
+                            </span>
+
+                            <span v-else>
+                                Buy now!
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHECKOUT FORM -->
+            <div v-else class="checkout-form">
+
+                <!-- CART ITEMS: uses existing products, cart and cartCount() -->
+                <div class="cart-items">
+                    <h2>Your Shopping Cart</h2>
+                    <p v-if="cartItemCount === 0">Your cart is empty. Add some products first!</p>
+                    <div v-else>
+                        <div class="cart-item" v-for="product in products"
+                             v-bind:key="product.id" v-if="cartCount(product.id) > 0">
+                            <span>{{ product.title }}</span>
+                            <span>Quantity: {{ cartCount(product.id) }}</span>
+                            <div class="cart-item-actions">
+                                <strong>${{ (product.price * cartCount(product.id)).toFixed(2) }}</strong>
+                                <button type="button" class="remove-item-button"
+                                        v-on:click="removeFromCart(product.id)"
+                                        v-bind:aria-label="'Remove ' + product.title + ' from cart'">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Checkout</h2>
+                <h3>Enter Your Information</h3>
+
+                <!-- FIRST NAME -->
+                <p>
+                    <strong>First Name:</strong>
+                    <input v-model.trim="order.firstName">
+                </p>
+
+                <!-- LAST NAME -->
+                <p>
+                    <strong>Last Name:</strong>
+                    <input v-model.trim="order.lastName">
+                </p>
+
+                <!-- PHONE NUMBER -->
+                <p>
+                    <strong>Phone:</strong>
+                    <input v-model.trim="order.phone" type="tel" inputmode="numeric" placeholder="Numbers only">
+                </p>
+
+                <!-- ADDRESS -->
+                <p>
+                    <strong>Address:</strong>
+                    <input v-model="order.address">
+                </p>
+
+                <!-- CITY -->
+                <p>
+                    <strong>City:</strong>
+                    <input v-model="order.city">
+                </p>
+
+                <!-- STATE -->
+                <p>
+                    <strong>State:</strong>
+
+                    <select v-model="order.state">
+
+                        <option disabled value="">
+                            State
+                        </option>
+
+                        <option
+                            v-for="(state, key) in states"
+                            v-bind:value="state">
+                            {{ key }}
+                        </option>
+
+                    </select>
+                </p>
+
+                <!-- ZIP CODE -->
+                <p>
+                    <strong>Zip/Postal Code:</strong>
+                    <input v-model.number="order.zip" type="number">
+                </p>
+
+                <!-- GIFT OPTION -->
+                <p>
+                    <input
+                        type="checkbox"
+                        id="gift"
+                        v-model="order.gift"
+                        v-bind:true-value="order.sendGift"
+                        v-bind:false-value="order.dontSendGift">
+
+                    <label for="gift">
+                        Ship As Gift?
+                    </label>
+                </p>
+
+                <!-- SHIPPING METHOD -->
+                <p>
+                    <input
+                        type="radio"
+                        id="home"
+                        value="Home"
+                        v-model="order.method">
+
+                    <label for="home">Home</label>
+
+                    <input
+                        type="radio"
+                        id="business"
+                        value="Business"
+                        v-model="order.method">
+
+                    <label for="business">Business</label>
+                </p>
+
+                <!-- PLACE ORDER -->
+                <button v-on:click="submitForm" v-bind:disabled="!canPlaceOrder">
+                    Place Order
+                </button>
+                <p v-if="!canPlaceOrder" class="validation-note">
+                    Add a product, then enter your first name, last name (letters only),
+                    and phone number (numbers only).
+                </p>
+
+
+                <!-- ORDER INFORMATION -->
+                <h2>Order Information</h2>
+
+                <p>First Name: {{ order.firstName }}</p>
+                <p>Last Name: {{ order.lastName }}</p>
+                <p>Phone: {{ order.phone }}</p>
+                <p>Address: {{ order.address }}</p>
+                <p>City: {{ order.city }}</p>
+                <p>State: {{ order.state }}</p>
+                <p>Zip: {{ order.zip }}</p>
+                <p>Gift: {{ order.gift }}</p>
+                <p>Shipping Method: {{ order.method }}</p>
+                <p>Cart Items: {{ cartItemCount }}</p>
+
+            </div>
+
+        </main>
+
+
+        <!-- RIGHT SIDE: SHOPPING CART -->
+        <aside class="checkout">
+
+            <h2>Your Cart</h2>
+
+            <p>
+                <span class="fas fa-shopping-cart"></span>
+                Items in cart:
+                <strong>{{ cartItemCount }}</strong>
+            </p>
+
+            <p class="cart-note" v-if="cartItemCount === 0">
+                Your cart is empty.
+            </p>
+
+            <p class="cart-note" v-else>
+                Your items are ready for checkout.
+            </p>
+
+            <button
+                class="checkout-button"
+                v-on:click="showCheckout"
+                v-bind:disabled="showProduct && cartItemCount === 0">
+
+                {{ showProduct ? 'Checkout' : 'Back to Products' }}
+
+            </button>
+
+        </aside>
+
+    </div>
+
+    <section class="promo" id="about" v-if="showProduct">
+        <div class="promo-left">
+
+            <div class="promo-image">
+                <img src="about.jpg" alt="About Snoopy Learning School">
+            </div>
+        
+            <div class="school-address">
+                <h3>Snoopy Learning school</h3>
+                <p>📍 1216,knowlege village, Dubai internet city </p>
+                <p>Monday – Friday | Open</p>
+            </div>
+        
+        </div>
+        <div class="promo-text">
+         
+            <h1>Class Fully Booked?</h1>
+            <p>No worries! Please wait until spaces become available again. We regularly update our class availability and announce new openings on our website.</p>
+            <h1>Opening Days & Hours</h1>
+
+              <p>Monday – Friday: Open for classes and activities
+                
+                Saturday & Sunday: Closed
+                
+                Public Holidays: Closed</p>
+            <p>Class schedules and availability may vary depending on the activity. Please check individual class details before booking.</p>
+              
+            <a class="hero-button" href="#shop">see new lessons &rarr;</a>
+        </div>
+    </section>
+
+</div>
+
+
+<!-- VUE JAVASCRIPT -->
+<script type="text/javascript">
+
+    var webstore = new Vue({
+
+        el: '#app',
+
+        data: {
+
+            sitename: "Snoppy Learning school",
+
+            products: products,
+
+            cart: [],
+
+            showProduct: true,
+
+            order: {
+                firstName: '',
+                lastName: '',
+                phone: '',
+                address: '',
+                city: '',
+                state: '',
+                zip: '',
+                method: 'Home',
+                sendGift: 'Send as a gift',
+                dontSendGift: 'Do not send as a gift',
+                gift: 'Do not send as a gift'
+            },
+
+            states: {
+                AJ: 'AJMAN',
+                DXB: 'DUBAI',
+                SHJ: 'SHARJAH',
+                RAK: 'RAS AL KHAIMA'
+            }
+
+        },
+
+        methods: {
+
+            // ADD PRODUCT TO CART
+            addToCart: function(product) {
+                this.cart.push(product.id);
+            },
+
+            // REMOVE A PRODUCT FROM THE CART (ALL OF ITS QUANTITY)
+            removeFromCart: function(id) {
+                this.cart = this.cart.filter(function(cartId) {
+                    return cartId !== id;
+                });
+            },
+
+            // CHECK AVAILABLE INVENTORY
+            canAddToCart: function(product) {
+                return product.availableInventory > this.cartCount(product.id);
+            },
+
+            // COUNT ITEMS IN CART
+            cartCount: function(id) {
+
+                let count = 0;
+
+                for (let i = 0; i < this.cart.length; i++) {
+
+                    if (this.cart[i] === id) {
+                        count++;
+                    }
+
+                }
+
+                return count;
+            },
+
+            // SHOP / ABOUT NAVIGATION
+            goToSection: function(section) {
+                this.showProduct = true;
+                this.$nextTick(function() {
+                    var target = document.getElementById(section);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            },
+
+            // OPEN CART FROM HEADER
+            openCart: function() {
+                if (this.cartItemCount === 0) return;
+                this.showProduct = false;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            // SWITCH BETWEEN PRODUCTS AND CHECKOUT (original function)
+            showCheckout: function() {
+                if (this.showProduct && this.cartItemCount === 0) return;
+                this.showProduct = !this.showProduct;
+            },
+
+            // SUBMIT ORDER
+            submitForm: function() {
+                if (!this.canPlaceOrder) return;
+                alert('Order submitted!');
+            }
+
+        },
+
+        computed: {
+
+            // DISABLE ORDER UNTIL THE CART, NAME AND PHONE ARE VALID
+            canPlaceOrder: function() {
+                var lettersOnly = /^[A-Za-z]+$/;
+                var numbersOnly = /^[0-9]{11}$/;
+                return this.cart.length > 0 &&
+                    lettersOnly.test(this.order.firstName) &&
+                    lettersOnly.test(this.order.lastName) &&
+                    numbersOnly.test(this.order.phone);
+            },
+
+            // TOTAL ITEMS IN CART
+            cartItemCount: function() {
+                return this.cart.length;
+            },
+
+            // SORT PRODUCTS BY PRICE
+            sortedProducts: function() {
+
+                function compare(a, b) {
+
+                    if (a.price > b.price) return 1;
+
+                    if (a.price < b.price) return -1;
+
+                    return 0;
+                }
+
+                return this.products.sort(compare);
+            }
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
