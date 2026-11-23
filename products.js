@@ -70,4 +70,40 @@ let products = [
         availableInventory: 5,
         rating: 4
     }
+    {
+        id: 1008,
+        title: 'Art & Painting',
+        description: 'Creative painting lessons for kids',
+        price: 35,
+        image: 'snoppy/art.jpg',
+        availableInventory: 5,
+        rating: 5
+    },
+    {
+        id: 1009,
+        title: 'Swimming',
+        description: 'Beginner swimming lessons for kids',
+        price: 50,
+        image: 'snoppy/swimming.jpg',
+        availableInventory: 5,
+        rating: 4
+    },
+    {
+        id: 1010,
+        title: 'Dance Class',
+        description: 'Fun dance lessons for children',
+        price: 40,
+        image: 'snoppy/dance.jpg',
+        availableInventory: 5,
+        rating: 5
+    },
+    {
+        id: 1011,
+        title: 'Music & Piano',
+        description: 'Introduction to music and piano',
+        price: 45,
+        image: 'snoppy/music.jpg',
+        availableInventory: 5,
+        rating: 4
+    }
 ];
