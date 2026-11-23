@@ -375,3 +375,22 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
     color: #800020;
     cursor: pointer;
 }
+
+/* Cart lesson images */
+.cart-product-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-product-image {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.cart-product-info p {
+    margin: 6px 0 0;
+    font-size: 14px;
+}

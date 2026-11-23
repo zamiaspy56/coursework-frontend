@@ -214,75 +214,7 @@
                     <input v-model.trim="order.phone" type="tel" inputmode="numeric" placeholder="Numbers only">
                 </p>
 
-                <!-- ADDRESS -->
-                <p>
-                    <strong>Address:</strong>
-                    <input v-model="order.address">
-                </p>
-
-                <!-- CITY -->
-                <p>
-                    <strong>City:</strong>
-                    <input v-model="order.city">
-                </p>
-
-                <!-- STATE -->
-                <p>
-                    <strong>State:</strong>
-
-                    <select v-model="order.state">
-
-                        <option disabled value="">
-                            State
-                        </option>
-
-                        <option
-                            v-for="(state, key) in states"
-                            v-bind:value="state">
-                            {{ key }}
-                        </option>
-
-                    </select>
-                </p>
-
-                <!-- ZIP CODE -->
-                <p>
-                    <strong>Zip/Postal Code:</strong>
-                    <input v-model.number="order.zip" type="number">
-                </p>
-
-                <!-- GIFT OPTION -->
-                <p>
-                    <input
-                        type="checkbox"
-                        id="gift"
-                        v-model="order.gift"
-                        v-bind:true-value="order.sendGift"
-                        v-bind:false-value="order.dontSendGift">
-
-                    <label for="gift">
-                        Ship As Gift?
-                    </label>
-                </p>
-
-                <!-- SHIPPING METHOD -->
-                <p>
-                    <input
-                        type="radio"
-                        id="home"
-                        value="Home"
-                        v-model="order.method">
-
-                    <label for="home">Home</label>
-
-                    <input
-                        type="radio"
-                        id="business"
-                        value="Business"
-                        v-model="order.method">
-
-                    <label for="business">Business</label>
-                </p>
+        
 
                 <!-- PLACE ORDER -->
                 <button v-on:click="submitForm" v-bind:disabled="!canPlaceOrder">
@@ -300,13 +232,7 @@
                 <p>First Name: {{ order.firstName }}</p>
                 <p>Last Name: {{ order.lastName }}</p>
                 <p>Phone: {{ order.phone }}</p>
-                <p>Address: {{ order.address }}</p>
-                <p>City: {{ order.city }}</p>
-                <p>State: {{ order.state }}</p>
-                <p>Zip: {{ order.zip }}</p>
-                <p>Gift: {{ order.gift }}</p>
-                <p>Shipping Method: {{ order.method }}</p>
-                <p>Cart Items: {{ cartItemCount }}</p>
+               
 
             </div>
 
