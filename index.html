@@ -169,8 +169,18 @@
                     <div v-else>
                         <div class="cart-item" v-for="product in products"
                              v-bind:key="product.id" v-if="cartCount(product.id) > 0">
-                            <span>{{ product.title }}</span>
-                            <span>Quantity: {{ cartCount(product.id) }}</span>
+                            
+
+                             <div class="cart-product-info">
+                                <img v-bind:src="product.image"
+                                v-bind:alt="product.title"
+                                class="cart-product-image">
+                                <div>
+                                 <strong>{{ product.title }}</strong>
+                                 <p>Quantity: {{ cartCount(product.id) }}</p>
+                                </div>
+                            </div>
+
                             <div class="cart-item-actions">
                                 <strong>${{ (product.price * cartCount(product.id)).toFixed(2) }}</strong>
                                 <button type="button" class="remove-item-button"
