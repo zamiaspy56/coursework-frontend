@@ -7,7 +7,7 @@ let products = [
         price: 500,
         availableInventory: 5,
         description: '8 week karate lesson, Fri - Mon - Wed',
-        image: 'snoppy/pin de Snoopy con cinturón franja verde, ahogo pedidos (1).jpg',
+        image: 'images/karate.jpg',
         rating: 4
     },
     {
@@ -17,7 +17,7 @@ let products = [
         price: 60,
         availableInventory: 5,
         description: 'Fencing for kids under 15, 10 classes. Monday to Friday',
-        image: 'snoppy/612630355601742050.jpg',
+        image: 'images/fencer.jpg',
         rating: 4
     },
     {
