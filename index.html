@@ -80,11 +80,18 @@
 
                         <h3 v-text="product.title"></h3>
 
-                        <p v-html="product.description"></p>
-
+                        <p>Location: {{ product.location }}</p>
+                        
                         <p class="price">
                             Price: ${{ product.price }}
                         </p>
+                        
+                        <p class="stock">
+                            Available stock:
+                            {{ product.availableInventory - cartCount(product.id) }}
+                        </p>
+                        
+                        <p v-html="product.description"></p>
 
                         <!-- STAR RATING -->
                         <div class="rating">
