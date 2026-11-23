@@ -64,6 +64,25 @@
 
                 <h2>Available lessons</h2>
 
+<div class="sorting-controls">
+
+    <label>Sort by:</label>
+    <select v-model="sortBy">
+        <option value="title">Subject</option>
+        <option value="location">Location</option>
+        <option value="price">Price</option>
+        <option value="availableInventory">Availability</option>
+    </select>
+
+    <label>Order:</label>
+    <select v-model="sortOrder">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+
+</div>
+
+
                 <div class="product-grid">
 
                     <!-- PRODUCT CARD -->
@@ -366,6 +385,10 @@
             cart: [],
 
             showProduct: true,
+
+        sortBy: 'title',
+        sortOrder: 'asc',
+
 
             order: {
                 firstName: '',
