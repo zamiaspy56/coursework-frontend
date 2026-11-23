@@ -477,3 +477,13 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
     padding: 6px 12px;
     margin-top: 4px;
 }
+/* Align cart with lesson images on shop page */
+.checkout.shop-cart {
+    margin-top: 135px;
+}
+
+@media (max-width: 760px) {
+    .checkout.shop-cart {
+        margin-top: 0;
+    }
+}
