@@ -226,12 +226,7 @@
                 </p>
 
 
-                <!-- ORDER INFORMATION -->
-                <h2>Order Information</h2>
-
-                <p>First Name: {{ order.firstName }}</p>
-                <p>Last Name: {{ order.lastName }}</p>
-                <p>Phone: {{ order.phone }}</p>
+               
                
 
             </div>
@@ -258,6 +253,35 @@
                 Your items are ready for checkout.
             </p>
 
+<!-- CART PREVIEW -->
+<div class="sidebar-cart-items" v-if="showProduct && cartItemCount > 0">
+
+    <div class="sidebar-cart-item"
+         v-for="product in products"
+         v-if="cartCount(product.id) > 0"
+         v-bind:key="product.id">
+
+        <img v-bind:src="product.image"
+             v-bind:alt="product.title">
+
+        <div class="sidebar-item-details">
+            <strong>{{ product.title }}</strong>
+            <p>Quantity: {{ cartCount(product.id) }}</p>
+            <p class="sidebar-item-price">
+                ${{ (product.price * cartCount(product.id)).toFixed(2) }}
+            </p>
+
+            <button type="button"
+                    class="remove-item-button"
+                    v-on:click="removeFromCart(product.id)">
+                Delete
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
             <button
                 class="checkout-button"
                 v-on:click="showCheckout"
@@ -278,7 +302,6 @@
     <p>Cart Items: {{ cartItemCount }}</p>
 
 </div>
-
 
         </aside>
 

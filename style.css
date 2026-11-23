@@ -143,7 +143,7 @@ body {
 /* Existing products and shopping cart — Vue logic unchanged */
 .shop-layout {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 22px;
     padding: 0 10px 28px;
 }
@@ -219,11 +219,13 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
 .product-card button { margin-top: 9px; }
 
 .checkout {
-    flex: 0 0 205px;
+    flex: 0 0 300px;
     padding: 22px 18px;
     border: 1px solid #efd8ce;
     border-radius: 18px;
     background: #fffdf9;
+    align-self: flex-start;
+    height: fit-content;
 }
 
 .checkout h2 {
@@ -237,7 +239,7 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
 
 /* Existing checkout form styling */
 .checkout-form {
-    max-width: 600px;
+    max-width: 100%;
     padding: 22px;
     border-radius: 18px;
     background: #ffedf0;
@@ -284,7 +286,13 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
     .top-nav { flex-wrap: wrap; gap: 12px; }
     .hero, .promo { grid-template-columns: 1fr; }
     .hero-text, .hero-image { min-height: 230px; }
-    .shop-layout { flex-direction: column; }
+    .shop-layout {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        padding: 0 10px 28px;
+        align-items: flex-start;
+    }
     .products, .checkout { width: 100%; }
     .checkout { flex-basis: auto; }
     .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -395,6 +403,7 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
     font-size: 14px;
 }
 
+
 /* Order information sidebar */
 .order-summary {
     margin-top: 25px;
@@ -415,4 +424,56 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
     font-size: 14px;
     line-height: 1.6;
     overflow-wrap: anywhere;
+}
+.cart-items h2 {
+    font-size: 32px;
+}
+
+.checkout-form h2 {
+    font-size: 34px;
+}
+
+/* Compact cart preview */
+.sidebar-cart-items {
+    margin: 18px 0;
+}
+
+.sidebar-cart-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #efd8ce;
+}
+
+.sidebar-cart-item img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.sidebar-item-details {
+    min-width: 0;
+}
+
+.sidebar-item-details strong {
+    color: #8B1E1E;
+    font-size: 14px;
+}
+
+.sidebar-item-details p {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.sidebar-item-price {
+    color: #8B1E1E;
+    font-weight: bold;
+}
+
+.sidebar-item-details .remove-item-button {
+    padding: 6px 12px;
+    margin-top: 4px;
 }
