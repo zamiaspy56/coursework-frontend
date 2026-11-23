@@ -139,7 +139,7 @@
                         <p class="stock-message">
 
                             <span v-if="product.availableInventory === cartCount(product.id)">
-                                STOCK OUT
+                                 FULLY BOOKED
                             </span>
 
                             <span v-else-if="product.availableInventory - cartCount(product.id) < 5">
@@ -316,7 +316,6 @@
         
             <div class="school-address">
                 <h3>Snoopy Learning school</h3>
-                <p>📍 1216,knowlege village, Dubai internet city </p>
                 <p>Monday – Friday | Open</p>
             </div>
         
@@ -366,22 +365,8 @@
                 firstName: '',
                 lastName: '',
                 phone: '',
-                address: '',
-                city: '',
-                state: '',
-                zip: '',
-                method: 'Home',
-                sendGift: 'Send as a gift',
-                dontSendGift: 'Do not send as a gift',
-                gift: 'Do not send as a gift'
+               
             },
-
-            states: {
-                AJ: 'AJMAN',
-                DXB: 'DUBAI',
-                SHJ: 'SHARJAH',
-                RAK: 'RAS AL KHAIMA'
-            }
 
         },
 
@@ -436,7 +421,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             },
 
-            // SWITCH BETWEEN PRODUCTS AND CHECKOUT (original function)
             showCheckout: function() {
                 if (this.showProduct && this.cartItemCount === 0) return;
                 this.showProduct = !this.showProduct;
