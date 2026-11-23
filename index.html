@@ -267,6 +267,19 @@
 
             </button>
 
+<!-- ORDER INFORMATION SIDEBAR -->
+<div class="order-summary" v-if="!showProduct">
+
+    <h3>Order Information</h3>
+
+    <p>First Name: {{ order.firstName }}</p>
+    <p>Last Name: {{ order.lastName }}</p>
+    <p>Phone: {{ order.phone }}</p>
+    <p>Cart Items: {{ cartItemCount }}</p>
+
+</div>
+
+
         </aside>
 
     </div>

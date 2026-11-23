@@ -394,3 +394,25 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
     margin: 6px 0 0;
     font-size: 14px;
 }
+
+/* Order information sidebar */
+.order-summary {
+    margin-top: 25px;
+    padding: 20px;
+    background: #FFF9EC;
+    border: 1px solid #E8CFC5;
+    border-radius: 15px;
+}
+
+.order-summary h3 {
+    color: #800020;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    margin-top: 0;
+}
+
+.order-summary p {
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
