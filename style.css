@@ -352,3 +352,26 @@ button:disabled { opacity: 0.42; cursor: not-allowed; }
 .promo-text strong {
     color: #800020;
 }
+
+/* Lesson sorting */
+.sorting-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.sorting-controls label {
+    color: #800020;
+    font-weight: bold;
+}
+
+.sorting-controls select {
+    padding: 10px 15px;
+    border: 1px solid #800020;
+    border-radius: 10px;
+    background-color: #FFF9EC;
+    color: #800020;
+    cursor: pointer;
+}

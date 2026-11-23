@@ -496,19 +496,30 @@
             },
 
             // SORT PRODUCTS BY PRICE
-            sortedProducts: function() {
+            
+// SORT LESSONS
+sortedProducts: function() {
 
-                function compare(a, b) {
+var sortBy = this.sortBy;
+var sortOrder = this.sortOrder;
 
-                    if (a.price > b.price) return 1;
+return this.products.slice().sort(function(a, b) {
 
-                    if (a.price < b.price) return -1;
+    var result = 0;
 
-                    return 0;
-                }
+    if (sortBy === 'title' || sortBy === 'location') {
+        result = a[sortBy].localeCompare(b[sortBy]);
+    } else {
+        result = a[sortBy] - b[sortBy];
+    }
 
-                return this.products.sort(compare);
-            }
+    if (sortOrder === 'desc') {
+        result = result * -1;
+    }
+
+    return result;
+});
+}
 
         }
 
