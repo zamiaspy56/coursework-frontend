@@ -27,7 +27,7 @@ let products = [
         price: 30,
         availableInventory: 5,
         description: 'Basic cooking and drinks making course, 12 classes',
-        image: 'snoppy/cooking.jpg',
+        image: 'images/cooking.jpg',
         rating: 5
     },
     {
@@ -37,7 +37,7 @@ let products = [
         price: 25,
         availableInventory: 5,
         description: 'Public speaking lessons, 4 classes. Fri - Mon - Wed',
-        image: 'snoppy/snoppy talks.jpg',
+        image: 'images/talksprout.jpg',
         rating: 3
     },
     {
@@ -47,7 +47,7 @@ let products = [
         price: 28,
         availableInventory: 5,
         description: 'Boxing level 1 for kids under 12, 5 classes',
-        image: 'snoppy/872572496539082420.jpg',
+        image: 'images/boxing.jpg',
         rating: 4
     },
     {
@@ -57,7 +57,7 @@ let products = [
         price: 20,
         availableInventory: 5,
         description: 'Money management for kids, 4 classes',
-        image: 'snoppy/780882022935196182.jpg',
+        image: 'images/porgress.jpg',
         rating: 5
     },
     {
@@ -67,7 +67,7 @@ let products = [
         price: 61,
         availableInventory: 5,
         description: 'Junior basketball for ages 6-10, 17 classes',
-        image: 'snoppy/Basketball Player Snoopy.jpg',
+        image: 'images/basketball.jpg',
         rating: 4
     },
     {
@@ -77,7 +77,7 @@ let products = [
         price: 35,
         availableInventory: 5,
         description: 'Creative painting lessons for kids',
-        image: 'snoppy/art.jpg',
+        image: 'images/painting.jpg',
         rating: 5
     },
     {
@@ -87,7 +87,7 @@ let products = [
         price: 50,
         availableInventory: 5,
         description: 'Beginner swimming lessons for kids',
-        image: 'snoppy/swimming.jpg',
+        image: 'images/swimming.jpg',
         rating: 4
     },
     {
@@ -97,7 +97,7 @@ let products = [
         price: 40,
         availableInventory: 5,
         description: 'Fun dance lessons for children',
-        image: 'snoppy/dance.jpg',
+        image: 'images/frnds.jpg',
         rating: 5
     },
     {
@@ -107,7 +107,7 @@ let products = [
         price: 45,
         availableInventory: 5,
         description: 'Introduction to music and piano',
-        image: 'snoppy/music.jpg',
+        image: 'images/painting.jpg',
         rating: 4
     }
 ];
